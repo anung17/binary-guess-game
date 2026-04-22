@@ -23,6 +23,25 @@ def reset_callback():
     st.session_state.kartu5 = None
 
 
+def print_numbers(data):
+    baris = '## `'
+    kol = 1
+    printed = len(data)
+    for d in data:
+        baris = baris + f"{d:02d} "
+        printed -= 1
+        kol += 1
+        if kol > kolom:
+            kol = 1
+            if printed>0:
+                baris = baris + '`\n## `'
+            else:
+                baris = baris + '`\n'
+    if printed>0:
+        baris = baris + "`"
+    return baris
+
+
 #biggest = int(input("Bilangan bulat positif terbesar yang diinginkan: "))
 ##biggest = st.slider( "Bilangan bulat positif terbesar yang diinginkan:", 31, 100, 31)
 biggest = 31
@@ -54,25 +73,13 @@ for card in range(1, len_bin+1):
 
 kolom = int(sqrt(max_members))
 
-def print_numbers(data):
-    baris = '## `'
-    kol = 1
-    printed = len(data)
-    for d in data:
-        baris = baris + f"{d:02d} "
-        printed -= 1
-        kol += 1
-        if kol > kolom:
-            kol = 1
-            if printed>0:
-                baris = baris + '`\n## `'
-            else:
-                baris = baris + '`\n'
-    if printed>0:
-        baris = baris + "`"
-    return baris
-
 ##pprint(cards)
+
+st.header("Tebak Angka")
+st.markdown('''
+Aplikasi ini meminta anda untuk memilih sebuah angka bilangan bulat,
+dan berusaha untuk menebak angka yang anda pikirkan.
+''')
 
 petunjuk, tab1, tab2, tab3, tab4, tab5,hasil = st.tabs(
     ['Petunjuk', 'Kartu 1', 'Kartu 2', 'Kartu 3',
