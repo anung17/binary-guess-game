@@ -75,10 +75,10 @@ kolom = int(sqrt(max_members))
 
 ##pprint(cards)
 
-st.header("Tebak Angka")
+st.header("Dukun Digital Tebak Angka")
 st.markdown('''
-Aplikasi ini meminta anda untuk memilih sebuah angka bilangan bulat,
-dan berusaha untuk menebak angka yang anda pikirkan.
+Aplikasi ini meminta kamu untuk memilih sebuah angka bilangan bulat,
+dan berusaha untuk menebak angka yang kamu pikirkan.
 ''')
 
 petunjuk, tab1, tab2, tab3, tab4, tab5,hasil = st.tabs(
@@ -89,7 +89,11 @@ petunjuk, tab1, tab2, tab3, tab4, tab5,hasil = st.tabs(
 with petunjuk:
     st.header("Petunjuk Permainan")
     st.write('''
-Pikirkan sebuah bilangan bulat antara 1 hingga 31. Cek apakah bilangan yang anda pikirkan muncul di Kartu 1, Kartu 2, dan seterusnya hingga Kartu 5.'''
+- Pikirkan sebuah bilangan bulat antara 1 hingga 31.
+- Cek apakah bilangan yang anda pikirkan muncul di Kartu 1, Kartu 2, dan seterusnya hingga Kartu 5.
+- Pada setiap tab Kartu, kamu harus menjawab apakah bilangan yang kamu pikirkan ada atau tidak.
+- _Dukun Digital_ akan menebak angka yang kamu pikirkan.
+             '''
             )
     st.session_state.total = 0
 
@@ -173,5 +177,6 @@ with hasil:
     st.header("Hasil")
     with st.expander("Angka yang kamu pikirkan adalah", expanded=False):
         st.write(f"## `{st.session_state.total}`")
+        st.write("Bagaimana, apakah tebakan _Dukun Digital_ benar?")
     st.button("Ulangi dari awal", on_click=reset_callback)
 
