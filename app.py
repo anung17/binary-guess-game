@@ -208,8 +208,23 @@ with tab6:
 
 with hasil:
     st.header("Hasil")
-    with st.expander("Angka yang kamu pikirkan adalah", expanded=False):
-        st.write(f"## `{st.session_state.total}`")
-        st.write("Bagaimana, apakah tebakan _Dukun Digital_ benar?")
+    if kartu1 is None:
+        st.write("Kamu belum menentukan jawaban untuk `Kartu 1`.")
+    elif kartu2 is None:
+        st.write("Kamu belum menentukan jawaban untuk `Kartu 2`.")
+    elif kartu3 is None:
+        st.write("Kamu belum menentukan jawaban untuk `Kartu 3`.")
+    elif kartu4 is None:
+        st.write("Kamu belum menentukan jawaban untuk `Kartu 4`.")
+    elif kartu5 is None:
+        st.write("Kamu belum menentukan jawaban untuk `Kartu 5`.")
+    elif kartu6 is None:
+        st.write("Kamu belum menentukan jawaban untuk `Kartu 6`.")
+    else:
+        st.write("Terima kasih sudah menentukan jawaban untuk semua kartu...")
+
+        with st.expander("..dan angka yang kamu pikirkan adalah", expanded=False):
+            st.write(f"## `{st.session_state.total}`")
+            st.write("Bagaimana, apakah tebakan _Dukun Digital_ benar?")
     st.button("Ulangi dari awal", on_click=reset_callback)
 
