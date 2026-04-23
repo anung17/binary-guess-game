@@ -89,6 +89,25 @@ def print_numbers(data):
 petunjuk, about_us = st.tabs(
     [':green[Petunjuk]', ':green[Tentang Kami]']
 )
+
+with petunjuk:
+    st.header("Petunjuk Permainan")
+    st.write('''
+- Pikirkan sebuah bilangan bulat antara 1 hingga 63.
+- Periksa apakah bilangan yang kamu pikirkan muncul di `Kartu 1`, `Kartu 2`, dan seterusnya hingga `Kartu 6` di bawah ini.
+- Pada setiap tab Kartu, kamu harus menjawab apakah bilangan yang kamu pikirkan "**Ada**" atau "**Tidak ada**".
+- _Dukun Digital_ akan menebak angka yang kamu pikirkan di tab `Hasil`.
+             '''
+            )
+    st.session_state.total = 0
+
+with about_us:
+    st.write("Dibuat oleh:")
+    st.write("Laboratorium Pemrograman")
+    st.write("Jurusan Teknik Informatika")
+    st.write("Fakultas Teknologi Industri")
+    st.write("Universitas Trisakti")
+
 tab1, tab2, tab3, tab4, tab5, tab6, hasil = st.tabs(
     [
      '`Kartu 1`', '`Kartu 2`', '`Kartu 3`',
@@ -96,30 +115,6 @@ tab1, tab2, tab3, tab4, tab5, tab6, hasil = st.tabs(
         '`Hasil`'
     ]
 )
-
-with petunjuk:
-    st.header("Petunjuk Permainan")
-    st.write('''
-- Pikirkan sebuah bilangan bulat antara 1 hingga 63.
-- Cek apakah bilangan yang anda pikirkan muncul di **`Kartu 1`**, **`Kartu 2`**, dan seterusnya hingga **`Kartu 6`** di bawah ini.
-- Pada setiap tab Kartu, kamu harus menjawab apakah bilangan yang kamu pikirkan ada atau tidak.
-- _Dukun Digital_ akan menebak angka yang kamu pikirkan di tab **`Hasil`**.
-             '''
-            )
-    st.session_state.total = 0
-
-with about_us:
-    st.write('''
-Dibuat oleh:
-
-Laboratorium Pemrograman
-
-Jurusan Teknik Informatika
-
-Fakultas Teknologi Industri
-
-Universitas Trisakti
-             ''')
 
 with tab1:
     st.write(print_numbers(cards[1]))
@@ -226,5 +221,5 @@ with hasil:
         with st.expander("..dan angka yang kamu pikirkan adalah", expanded=False):
             st.write(f"## `{st.session_state.total}`")
             st.write("Bagaimana, apakah tebakan _Dukun Digital_ benar?")
-    st.button("Ulangi dari awal", on_click=reset_callback)
+        st.button("Ulangi dari awal", on_click=reset_callback)
 
