@@ -10,41 +10,21 @@ Streamlit version of binary guess number game.
 """
 
 import streamlit as st
-from math import sqrt
+from math import sqrt, ceil
 
 st.set_page_config(layout="wide")
 
-def reset_callback():
-    st.session_state.total = 0
-    st.session_state.kartu1 = None
-    st.session_state.kartu2 = None
-    st.session_state.kartu3 = None
-    st.session_state.kartu4 = None
-    st.session_state.kartu5 = None
+st.logo('images/trisula.png', size='large')
 
-
-def print_numbers(data):
-    baris = '## `'
-    kol = 1
-    printed = len(data)
-    for d in data:
-        baris = baris + f"{d:02d} "
-        printed -= 1
-        kol += 1
-        if kol > kolom:
-            kol = 1
-            if printed>0:
-                baris = baris + '`\n## `'
-            else:
-                baris = baris + '`\n'
-    if printed>0:
-        baris = baris + "`"
-    return baris
-
+st.header("Dukun Digital Tebak Angka")
+st.markdown('''
+Aplikasi ini meminta kamu untuk memilih sebuah angka bilangan bulat,
+dan berusaha untuk menebak angka yang kamu pikirkan.
+''')
 
 #biggest = int(input("Bilangan bulat positif terbesar yang diinginkan: "))
 ##biggest = st.slider( "Bilangan bulat positif terbesar yang diinginkan:", 31, 100, 31)
-biggest = 31
+biggest = 63
 len_bin = len(bin(biggest))-2
 ##print(f"Number of cards needed: {len_bin}.")
 
@@ -71,34 +51,77 @@ for card in range(1, len_bin+1):
     if len(members) > max_members:
         max_members = len(members)
 
-kolom = int(sqrt(max_members))
+kolom = int(ceil(sqrt(max_members)))
+
+def reset_callback():
+    st.session_state.total = 0
+    st.session_state.kartu1 = None
+    st.session_state.kartu2 = None
+    st.session_state.kartu3 = None
+    st.session_state.kartu4 = None
+    st.session_state.kartu5 = None
+    st.session_state.kartu6 = None
+
+
+def print_numbers(data):
+    baris = '## `'
+    kol = 1
+    printed = len(data)
+    ##print(data)
+    for d in data:
+        baris = baris + f"{d:02d} "
+        printed -= 1
+        kol += 1
+        if kol > kolom:
+            kol = 1
+            if printed>0:
+                baris = baris + '`\n## `'
+            else:
+                baris = baris + '`\n'
+    if printed>=0:
+        baris = baris + "`"
+    ##print(f"{printed:02d} {baris}")
+    return baris
+
 
 ##pprint(cards)
 
-st.header("Dukun Digital Tebak Angka")
-st.markdown('''
-Aplikasi ini meminta kamu untuk memilih sebuah angka bilangan bulat,
-dan berusaha untuk menebak angka yang kamu pikirkan.
-''')
-
-petunjuk, tab1, tab2, tab3, tab4, tab5,hasil = st.tabs(
-    ['Petunjuk', 'Kartu 1', 'Kartu 2', 'Kartu 3',
-     'Kartu 4', 'Kartu 5', 'Hasil']
+petunjuk, about_us = st.tabs(
+    [':green[Petunjuk]', ':green[Tentang Kami]']
+)
+tab1, tab2, tab3, tab4, tab5, tab6, hasil = st.tabs(
+    [
+     '`Kartu 1`', '`Kartu 2`', '`Kartu 3`',
+     '`Kartu 4`', '`Kartu 5`', '`Kartu 6`',
+        '`Hasil`'
+    ]
 )
 
 with petunjuk:
     st.header("Petunjuk Permainan")
     st.write('''
-- Pikirkan sebuah bilangan bulat antara 1 hingga 31.
-- Cek apakah bilangan yang anda pikirkan muncul di Kartu 1, Kartu 2, dan seterusnya hingga Kartu 5.
+- Pikirkan sebuah bilangan bulat antara 1 hingga 63.
+- Cek apakah bilangan yang anda pikirkan muncul di **`Kartu 1`**, **`Kartu 2`**, dan seterusnya hingga **`Kartu 6`** di bawah ini.
 - Pada setiap tab Kartu, kamu harus menjawab apakah bilangan yang kamu pikirkan ada atau tidak.
-- _Dukun Digital_ akan menebak angka yang kamu pikirkan.
+- _Dukun Digital_ akan menebak angka yang kamu pikirkan di tab **`Hasil`**.
              '''
             )
     st.session_state.total = 0
 
+with about_us:
+    st.write('''
+Dibuat oleh:
+
+Laboratorium Pemrograman
+
+Jurusan Teknik Informatika
+
+Fakultas Teknologi Industri
+
+Universitas Trisakti
+             ''')
+
 with tab1:
-    st.header("Kartu 1")
     st.write(print_numbers(cards[1]))
     kartu1 = st.radio(
         "Apakah bilangan yang kamu pikirkan muncul di sini?",
@@ -114,7 +137,6 @@ with tab1:
 
 
 with tab2:
-    st.header("Kartu 2")
     st.write(print_numbers(cards[2]))
     kartu2 = st.radio(
         "Apakah bilangan yang kamu pikirkan muncul di sini?",
@@ -129,7 +151,6 @@ with tab2:
         st.session_state.total += 0
 
 with tab3:
-    st.header("Kartu 3")
     st.write(print_numbers(cards[3]))
     kartu3 = st.radio(
         "Apakah bilangan yang kamu pikirkan muncul di sini?",
@@ -144,7 +165,6 @@ with tab3:
         st.session_state.total += 0
 
 with tab4:
-    st.header("Kartu 4")
     st.write(print_numbers(cards[4]))
     kartu4 = st.radio(
         "Apakah bilangan yang kamu pikirkan muncul di sini?",
@@ -159,7 +179,6 @@ with tab4:
         st.session_state.total += 0
 
 with tab5:
-    st.header("Kartu 5")
     st.write(print_numbers(cards[5]))
     kartu5 = st.radio(
         "Apakah bilangan yang kamu pikirkan muncul di sini?",
@@ -170,6 +189,20 @@ with tab5:
     )
     if kartu5 == 'Ada':
         st.session_state.total += 16
+    else:
+        st.session_state.total += 0
+
+with tab6:
+    st.write(print_numbers(cards[6]))
+    kartu6 = st.radio(
+        "Apakah bilangan yang kamu pikirkan muncul di sini?",
+        ['Ada', 'Tidak ada'],
+        horizontal=True,
+        index=None,
+        key='kartu6'
+    )
+    if kartu6 == 'Ada':
+        st.session_state.total += 32
     else:
         st.session_state.total += 0
 
