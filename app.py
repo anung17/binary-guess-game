@@ -94,8 +94,8 @@ with petunjuk:
     st.header("Petunjuk Permainan")
     st.write('''
 - Pikirkan sebuah bilangan bulat antara 1 hingga 63.
-- Periksa apakah bilangan yang kamu pikirkan muncul di `Kartu 1`, `Kartu 2`, dan seterusnya hingga `Kartu 6` di bawah ini.
-- Pada setiap tab Kartu, kamu harus menjawab apakah bilangan yang kamu pikirkan "**Ada**" atau "**Tidak ada**".
+- Periksa apakah bilangan yang kamu pikirkan muncul di kartu-kartu `K1`, `K2`, dan seterusnya hingga `K6` di bawah ini.
+- Pada setiap tab kartu, kamu harus menjawab apakah bilangan yang kamu pikirkan "**Ada**" atau "**Tidak ada**".
 - _Dukun Digital_ akan menebak angka yang kamu pikirkan di tab `Hasil`.
              '''
             )
@@ -110,9 +110,7 @@ with about_us:
 
 tab1, tab2, tab3, tab4, tab5, tab6, hasil = st.tabs(
     [
-     '`Kartu 1`', '`Kartu 2`', '`Kartu 3`',
-     '`Kartu 4`', '`Kartu 5`', '`Kartu 6`',
-        '`Hasil`'
+     '`K1`', '`K2`', '`K3`', '`K4`', '`K5`', '`K6`', '`Hasil`'
     ]
 )
 
@@ -204,17 +202,17 @@ with tab6:
 with hasil:
     st.header("Hasil")
     if kartu1 is None:
-        st.write("Kamu belum menentukan jawaban untuk `Kartu 1`.")
+        st.write("Kamu belum menentukan jawaban untuk kartu `K1`.")
     elif kartu2 is None:
-        st.write("Kamu belum menentukan jawaban untuk `Kartu 2`.")
+        st.write("Kamu belum menentukan jawaban untuk kartu `K2`.")
     elif kartu3 is None:
-        st.write("Kamu belum menentukan jawaban untuk `Kartu 3`.")
+        st.write("Kamu belum menentukan jawaban untuk kartu `K3`.")
     elif kartu4 is None:
-        st.write("Kamu belum menentukan jawaban untuk `Kartu 4`.")
+        st.write("Kamu belum menentukan jawaban untuk kartu `K4`.")
     elif kartu5 is None:
-        st.write("Kamu belum menentukan jawaban untuk `Kartu 5`.")
+        st.write("Kamu belum menentukan jawaban untuk kartu `K5`.")
     elif kartu6 is None:
-        st.write("Kamu belum menentukan jawaban untuk `Kartu 6`.")
+        st.write("Kamu belum menentukan jawaban untuk kartu `K6`.")
     else:
         st.write("Terima kasih sudah menentukan jawaban untuk semua kartu...")
 
